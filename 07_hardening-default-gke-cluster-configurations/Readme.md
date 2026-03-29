@@ -61,5 +61,3 @@ In this lab, I deployed a GKE cluster and analyzed its default security posture.
 - Secured container runtime settings
 
 ---
-
-## 📁 Project Structure
