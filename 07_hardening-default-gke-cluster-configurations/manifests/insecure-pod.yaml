@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: insecure-hostpath
+spec:
+  containers:
+  - name: insecure-container
+    image: google/cloud-sdk:latest
+    command: ["/bin/bash"]
+    args: ["-c", "sleep 3600"]
+    volumeMounts:
+    - mountPath: /rootfs
+      name: rootfs
+  volumes:
+  - name: rootfs
+    hostPath:
+      path: /
