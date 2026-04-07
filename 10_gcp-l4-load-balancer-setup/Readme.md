@@ -88,8 +88,8 @@ This lab uses **Network Load Balancer (Layer 4)** which routes traffic based on:
 ---
 
 ## 🏆 Author
-
-Akl – Future Cloud Security Engineer 🚀
+  Ayush Kumar Patel
+Student Cloud Security Engineer 🚀
 
 ---
 
