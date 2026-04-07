@@ -55,30 +55,6 @@ gcloud app deploy
 
 ---
 
-## 🖼️ Screenshots
-
-### GCP Dashboard
-
-![Dashboard](screenshots/gcp-console-dashboard.png)
-
-### App Deployment
-
-![Deployment](screenshots/app-deployment.png)
-
-### OAuth Configuration
-
-![OAuth](screenshots/oauth-consent-config.png)
-
-### IAP Enabled
-
-![IAP](screenshots/iap-enable-popup.png)
-
-### Role Assignment
-
-![IAM](screenshots/iap-role-assignment.png)
-
----
-
 ## 🎯 Outcome
 
 * Successfully deployed secure web app
