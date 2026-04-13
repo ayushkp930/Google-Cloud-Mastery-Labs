@@ -1,188 +1,74 @@
-# Identify Vulnerabilities and Remediation Techniques (XSS Lab)
+# 🛡️ GCP Web Security Scanner: XSS Vulnerability Lab
 
-## Overview
+## 📌 Project Overview
+This project demonstrates a hands-on cloud security lab focusing on discovering and remediating **Cross-Site Scripting (XSS)** vulnerabilities. The lab involves deploying a vulnerable web application on Google Cloud Compute Engine, exploiting the vulnerability, detecting it using the native **Google Cloud Web Security Scanner**, and finally applying a code-level fix.
 
-This lab demonstrates how to identify and remediate a common OWASP web application vulnerability: **Cross-Site Scripting (XSS)** using Google Cloud Web Security Scanner.
-
-A vulnerable banking application was deployed on a Compute Engine virtual machine and scanned using Google Cloud's Web Security Scanner to detect XSS vulnerabilities.
-
----
-
-## Objective
-
-- Deploy a vulnerable web application
-- Perform vulnerability scanning
-- Identify XSS vulnerabilities
-- Implement remediation techniques
-- Re-scan to verify security improvements
+## 🛠️ Tools & Technologies
+* **Cloud Platform:** Google Cloud Platform (GCP)
+* **Compute:** GCP Compute Engine (VM)
+* **Security Tool:** Web Security Scanner API
+* **CLI/Access:** Cloud Shell & SSH
+* **Vulnerability:** Cross-Site Scripting (XSS)
 
 ---
 
-## Technologies Used
+## 📸 Lab Implementation & Visual Evidence
 
-- Google Cloud Platform (GCP)
-- Compute Engine
-- Cloud Shell
-- Web Security Scanner
-- Python Flask
-- OWASP Top 10
+### 1️⃣ Cloud Environment Setup
+Provisioning the GCP environment and deploying the Compute Engine instance.
 
----
+*GCP Console Project Setup:*
+![GCP Console Project](lab_screenshots/01-gcp-console-project.png)
 
-## Architecture
+*VM Instance Successfully Created:*
+![VM Instance Created](lab_screenshots/02-vm-instance-created.png)
 
-1. Create static external IP
-2. Deploy Compute Engine VM
-3. Deploy vulnerable Flask application
-4. Configure firewall rules
-5. Run Web Security Scanner
-6. Identify XSS vulnerability
-7. Apply remediation
-8. Re-run security scan
+### 2️⃣ Deploying the Vulnerable Application
+Using Cloud Shell and SSH to configure the server and host the application.
 
----
+*Executing Cloud Shell Commands:*
+![Cloud Shell Commands](lab_screenshots/03-cloud-shell-commands.png)
 
-## Deployment Steps
+*Deploying App via SSH:*
+![SSH VM Deployment](lab_screenshots/04-ssh-vm-deployment.png)
 
-### 1 Create Static IP
+*Vulnerable Web App Running Live:*
+![Vulnerable App Running](lab_screenshots/05-vulnerable-app-running.png)
 
+### 3️⃣ The Attack (XSS Injection)
+Demonstrating the vulnerability by injecting a malicious script payload into the application.
 
-gcloud compute addresses create xss-test-ip-address --region=us-west1
+*Active XSS Injection Demo:*
+![XSS Injection Demo](lab_screenshots/06-xss-injection-demo.png)
 
+### 4️⃣ Vulnerability Detection (Web Security Scanner)
+Configuring and executing the GCP Web Security Scanner to automatically detect the injected XSS flaw.
 
----
+*Enabling Web Security Scanner API:*
+![Web Security Scanner API](lab_screenshots/07-web-security-scanner-api.png)
 
-### 2 Create Virtual Machine
+*Creating Scan Configuration:*
+![Create Scan Config](lab_screenshots/08-create-scan-config.png)
 
+*Security Scan in Progress:*
+![Scan Running](lab_screenshots/09-scan-running.png)
 
-gcloud compute instances create xss-test-vm-instance
---address=xss-test-ip-address
---no-service-account
---no-scopes
---machine-type=e2-micro
---zone=us-west1-c
+*Scanner Successfully Detects XSS Vulnerability:*
+![XSS Vulnerability Detected](lab_screenshots/10-xss-vulnerability-detected.png)
 
+### 5️⃣ Security Remediation
+Applying a security patch to the application's source code to sanitize inputs and prevent payload execution.
 
----
-
-### 3 Deploy Vulnerable Application
-
-
-gsutil cp gs://cloud-training/GCPSEC-ScannerAppEngine/flask_code.tar .
-tar xvf flask_code.tar
-python3 app.py
-
-
-Application runs on:
-
-
-http://VM_EXTERNAL_IP:8080
-
+*Code Remediation Implemented:*
+![Code Remediation](lab_screenshots/11-code-remediation.png)
 
 ---
 
-## Demonstrating the Vulnerability
-
-The application accepts user input without proper sanitization.
-
-Example payload:
-
-<script>alert('XSS')</script>
-
-Result: Browser executes injected JavaScript.
+## ✅ Conclusion & Key Learnings
+* Successfully deployed and managed infrastructure using GCP Compute Engine.
+* Understood the mechanics of Cross-Site Scripting (XSS) attacks.
+* Learned how to configure and leverage GCP's native **Web Security Scanner** to automate vulnerability discovery.
+* Implemented secure coding practices to remediate the identified vulnerability.
 
 ---
-
-## Vulnerability Scan
-
-Using **Google Cloud Web Security Scanner**:
-
-- Created scan configuration
-- Target URL added
-- Scanner crawled application
-- XSS vulnerability detected
-
----
-
-## Vulnerability Detected
-
-OWASP Category:
-
-
-A03: Cross-Site Scripting (XSS)
-
-
-Cause:
-
-
-User input was not properly sanitized before rendering in HTML.
-
-
----
-
-## Remediation Technique
-
-The vulnerability was fixed by escaping user input before rendering.
-
-Example secure code:
-
-
-output_string = "".join([html_escape_table.get(c, c) for c in input_string])
-
-
-This prevents malicious scripts from executing.
-
----
-
-## Security Best Practices
-
-- Always sanitize user input
-- Use output encoding
-- Apply Content Security Policy (CSP)
-- Use automated security scanning
-- Follow OWASP secure coding guidelines
-
----
-
-## Screenshots
-
-### GCP Project Dashboard
-![dashboard](screenshots/01-gcp-console-project.png)
-
-### VM Instance Deployment
-![vm](screenshots/02-vm-instance-created.png)
-
-### Cloud Shell Commands
-![shell](screenshots/03-cloud-shell-commands.png)
-
-### Vulnerable Application Running
-![app](screenshots/05-vulnerable-app-running.png)
-
-### XSS Injection Demonstration
-![xss](screenshots/06-xss-injection-demo.png)
-
-### Web Security Scanner Setup
-![scanner](screenshots/08-create-scan-config.png)
-
-### Vulnerability Detected
-![vuln](screenshots/10-xss-vulnerability-detected.png)
-
-### Code Remediation
-![fix](screenshots/11-code-remediation.png)
-
----
-
-## Key Learning Outcomes
-
-- Deploy vulnerable applications in cloud environments
-- Identify web vulnerabilities using automated scanners
-- Understand OWASP Top 10 vulnerabilities
-- Apply secure coding practices
-- Implement vulnerability remediation techniques
-
----
-
-## Author
-
-Ayush  
-Cybersecurity & Cloud Security Enthusiast
+**Author:** Ayush Kumar Patel | **Role:** Cloud Security Enthusiast
